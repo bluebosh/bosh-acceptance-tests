@@ -36,6 +36,10 @@ module Bat
       @env.bat_infrastructure == 'warden'
     end
 
+    def softlayer?
+      @env.bat_infrastructure == 'softlayer'
+    end
+
     def persistent_disk(job, index, options)
       get_disks(job, index, options).each do |_, disk|
         if disk[:mountpoint] == '/var/vcap/store'
