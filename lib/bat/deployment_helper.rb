@@ -1,5 +1,6 @@
 require 'tmpdir'
 require 'logger'
+require 'json'
 
 module Bat
   module DeploymentHelper
@@ -98,6 +99,14 @@ module Bat
       # For vSphere and vCloud, the static_ip is the public IP
       @spec['properties']['vip'] || static_ip
     end
+
+
+    def public_ip_v2
+      output = @bosh_runner.bosh('instances --details').output
+      output_hash = JSON.parse(output)
+      output_hash["Tables"][0]["Rows"][0]["ips"]
+    end
+
 
     def use_static_ip
       @spec['properties']['use_static_ip'] = true
