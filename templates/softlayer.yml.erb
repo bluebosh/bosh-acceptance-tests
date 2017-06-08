@@ -7,18 +7,17 @@ releases:
 
 compilation:
   workers: 1
-  network: second
+  network: default
   reuse_compilation_vms: true
   cloud_properties:
     startCpus: 4
     maxMemory: 8192
     ephemeralDiskSize: 100
     datacenter: <%= properties.cloud_properties.data_center %>
-    vmNamePrefix: bat-softlayer-worker-
+    vmNamePrefix: bat-softlayer-worker
     domain: softlayer.com
     hourlyBillingFlag: true
     localDiskFlag: false
-    sshKey: 886121
 
 update:
   canaries: <%= properties.canaries || 1 %>
@@ -31,10 +30,9 @@ networks:
 <% properties.networks.each do |network| %>
 - name: <%= network.name %>
   type: dynamic
-  subnets:
-  - dns: <%= network.dns %>
-    cloud_properties:
-      vlan_id: <%= network.cloud_properties.vlan_id %>
+  dns: <%= network.dns %>
+  cloud_properties:
+    vlanIds: <%= network.cloud_properties.vlanIds %>
 <% end %>
 
 resource_pools:
@@ -71,12 +69,7 @@ jobs:
     persistent_disk: <%= properties.persistent_disk %>
     <% end %>
     networks:
-      <% properties.job_networks.each_with_index do |network, i| %>
-      - name: <%= network.name %>
-        <% if i == 0 %>
-        default: [dns, gateway]
-        <% end %>
-      <% end %>
+      - name: default
 
 properties:
   batlight:
