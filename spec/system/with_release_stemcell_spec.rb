@@ -81,7 +81,7 @@ describe 'with release and stemcell and subsequent deployments' do
       ]
       use_job('colocated')
       use_templates(%w[batarang batlight])
-      use_persistent_disk(2048)
+      use_persistent_disk(20480)
 
       @requirements.requirement(deployment, @spec)
 
@@ -89,7 +89,7 @@ describe 'with release and stemcell and subsequent deployments' do
       unless warden?
         @size = persistent_disk('colocated', 0, deployment: deployment)
       end
-      use_persistent_disk(4096)
+      use_persistent_disk(40960)
       @requirements.requirement(deployment, @spec, force: true)
     end
 
