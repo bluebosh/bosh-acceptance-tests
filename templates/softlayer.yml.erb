@@ -30,7 +30,7 @@ networks:
 <% properties.networks.each do |network| %>
 - name: <%= network.name %>
   type: dynamic
-  dns: <%= network.dns %>
+  dns: <%= properties.dns %>
   cloud_properties:
     vlanIds: <%= network.cloud_properties.vlanIds %>
 <% end %>
