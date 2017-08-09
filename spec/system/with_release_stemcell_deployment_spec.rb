@@ -43,7 +43,7 @@ describe 'with release, stemcell and deployment', core: true do
   end
 
   describe 'job' do
-    it 'should recreate a job' do
+    xit 'should recreate a job' do
       old_vm_cid = JSON.parse(bosh_safe('instances --details', deployment: deployment.name).output)['Tables'].first['Rows'].first["vm_cid"]
       expect(bosh_safe('recreate batlight/0', deployment: deployment.name)).to succeed
       new_vm_cid = JSON.parse(bosh_safe('instances --details', deployment: deployment.name).output)['Tables'].first['Rows'].first["vm_cid"]
