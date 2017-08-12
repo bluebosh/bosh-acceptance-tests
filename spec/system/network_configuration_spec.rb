@@ -55,7 +55,7 @@ describe 'network configuration' do
 
     after { manifest_with_different_dns.delete }
 
-    xit 'successfully reconfigures VM with new DNS nameservers' do
+    it 'successfully reconfigures VM with new DNS nameservers' do
       expect(bosh("-d #{manifest_with_different_dns.name} deploy #{manifest_with_different_dns.to_path}")).to succeed
       expect(bosh_ssh('batlight', 0, 'cat /etc/resolv.conf', deployment: deployment.name).output).to include('127.0.0.5')
     end
