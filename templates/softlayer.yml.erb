@@ -12,6 +12,7 @@ compilation:
   cloud_properties:
     startCpus: 4
     maxMemory: 8192
+    maxNetworkSpeed: 100
     ephemeralDiskSize: 100
     datacenter: <%= properties.cloud_properties.data_center %>
     vmNamePrefix: bat-softlayer-worker
@@ -45,6 +46,7 @@ resource_pools:
     cloud_properties:
       startCpus: 4
       maxMemory: 8192
+      maxNetworkSpeed: 100
       ephemeralDiskSize: 100
       datacenter: <%= properties.cloud_properties.data_center %>
       vmNamePrefix: <%= properties.cloud_properties.vm_name_prefix %>
