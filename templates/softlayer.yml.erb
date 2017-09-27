@@ -13,9 +13,9 @@ compilation:
   cloud_properties:
     startCpus: 4
     maxMemory: 8192
+    maxNetworkSpeed: 10
     ephemeralDiskSize: 100
-    datacenter:
-      name: <%= properties.cloud_properties.data_center %>
+    datacenter: <%= properties.cloud_properties.data_center %>
     vmNamePrefix: bat-softlayer-worker
     domain: softlayer.com
     hourlyBillingFlag: true
@@ -34,12 +34,7 @@ networks:
   type: dynamic
   dns: <%= properties.dns %>
   cloud_properties:
-    PrimaryNetworkComponent:
-      NetworkVlan:
-        Id: <%= network.cloud_properties.PrimaryNetworkComponent.NetworkVlan.Id %>
-    PrimaryBackendNetworkComponent:
-      NetworkVlan:
-        Id: <%= network.cloud_properties.PrimaryBackendNetworkComponent.NetworkVlan.Id %>
+    vlanIds: <%= network.cloud_properties.vlanIds %>
 <% end %>
 
 resource_pools:
@@ -53,9 +48,9 @@ resource_pools:
     cloud_properties:
       startCpus: 4
       maxMemory: 8192
+      maxNetworkSpeed: 10
       ephemeralDiskSize: 100
-      datacenter:
-        name: <%= properties.cloud_properties.data_center %>
+      datacenter: <%= properties.cloud_properties.data_center %>
       vmNamePrefix: <%= properties.cloud_properties.vm_name_prefix %>
       domain: <%= properties.cloud_properties.domain %>
       hourlyBillingFlag: true
