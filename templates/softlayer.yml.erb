@@ -6,20 +6,19 @@ releases:
     version: <%= properties.release || "latest" %>
 
 compilation:
-  bosh_ip: <%= properties.bosh_ip %>
   workers: 1
   network: default
   reuse_compilation_vms: true
   cloud_properties:
-    startCpus: 4
-    maxMemory: 8192
-    maxNetworkSpeed: 10
-    ephemeralDiskSize: 100
-    datacenter: <%= properties.cloud_properties.data_center %>
-    vmNamePrefix: bat-softlayer-worker
+    cpu: 4
+    memory: 8192
+    max_network_speed: 10
+    ephemeral_disk_size: 100
+    datacenter: <%= properties.cloud_properties.datacenter %>
+    hostname_prefix: bat-softlayer-worker
     domain: softlayer.com
-    hourlyBillingFlag: true
-    localDiskFlag: false
+    hourly_billing_flag: true
+    local_disk_flag: false
 
 update:
   canaries: <%= properties.canaries || 1 %>
@@ -34,27 +33,26 @@ networks:
   type: dynamic
   dns: <%= properties.dns %>
   cloud_properties:
-    vlanIds: <%= network.cloud_properties.vlanIds %>
+    vlan_ids: <%= network.cloud_properties.vlan_ids %>
 <% end %>
 
 resource_pools:
   - name: common
-    bosh_ip: <%= properties.bosh_ip %>
     network: default
     size: <%= properties.pool_size %>
     stemcell:
       name: <%= properties.stemcell.name %>
       version: '<%= properties.stemcell.version %>'
     cloud_properties:
-      startCpus: 4
-      maxMemory: 8192
-      maxNetworkSpeed: 10
-      ephemeralDiskSize: 100
-      datacenter: <%= properties.cloud_properties.data_center %>
-      vmNamePrefix: <%= properties.cloud_properties.vm_name_prefix %>
+      cpu: 4
+      memory: 8192
+      max_network_speed: 10
+      ephemeral_disk_size: 100
+      datacenter: <%= properties.cloud_properties.datacenter %>
+      hostname_prefix: <%= properties.cloud_properties.hostname_prefix %>
       domain: <%= properties.cloud_properties.domain %>
-      hourlyBillingFlag: true
-      localDiskFlag: false
+      hourly_billing_flag: true
+      local_disk_flag: false
     <% if properties.password %>
     env:
       bosh:
